@@ -16,3 +16,15 @@ a test class that demonstrates some of the testing functionality. Testing is fur
 discussed in the book.
 
 NOTE: There are several serious errors to be found in these classes.
+
+
+Answers:
+
+14. setUp() 
+    tearDown()
+
+17. Show Source 
+    Show Exception
+    Show Trace
+    
+
