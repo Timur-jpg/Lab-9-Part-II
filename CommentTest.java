@@ -42,22 +42,41 @@ public class CommentTest
     @Test
     public void testAddCommentReturnsFalseForDuplicateAuthor()
     {
-    SalesItem item = new SalesItem("Laptop", 99999);
-    item.addComment("Bob", "Great product!", 5);
-    boolean result = item.addComment("Bob", "Another comment", 4);
-    assertFalse(result);
+        SalesItem item = new SalesItem("Laptop", 99999);
+        item.addComment("Bob", "Great product!", 5);
+        boolean result = item.addComment("Bob", "Another comment", 4);
+        assertFalse(result);
     }
     
     @Test
     public void testAddCommentReturnsFalseForInvalidRatings()
     {  
-    SalesItem item = new SalesItem("Laptop", 99999);
+        SalesItem item = new SalesItem("Laptop", 99999);
     
-    boolean result0 = item.addComment("Alice", "Comment with rating 0", 0);
-    assertFalse(result0, "Rating 0 should be rejected");
+        boolean result0 = item.addComment("Alice", "Comment with rating 0", 0);
+        assertFalse(result0, "Rating 0 should be rejected");
     
-    boolean result6 = item.addComment("Bob", "Comment with rating 6", 6);
-    assertFalse(result6, "Rating 6 should be rejected");
+        boolean result6 = item.addComment("Bob", "Comment with rating 6", 6);
+        assertFalse(result6, "Rating 6 should be rejected");
+    }
+    
+    @Test
+    public void testMultipleVotes()
+    {
+        Comment comment = new Comment("Bob", "Nice", 4);
+        comment.upvote();
+        comment.upvote();
+        comment.downvote();
+        assertEquals(1, comment.getVoteCount());
+    }
+
+    @Test
+    public void testGetFullDetailsContainsInfo()
+    {
+        Comment comment = new Comment("Alice", "Great!", 5);
+        String details = comment.getFullDetails();
+        assertTrue(details.contains("Alice"));
+        assertTrue(details.contains("Great!"));
     }
 }
 
